@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.StringTokenizer;
 
-public class matching {
+public class matching1 {
     public static int MOD = (int) 1e9 + 7;
     public static int MAXN = 21;
     public static boolean[][] comp = new boolean[MAXN][MAXN];
