@@ -1,2 +1,2 @@
-# MiscCP
-Some miscellaneous competitive programming problems from various online judges.
+# CP
+Other problems I've done from different online judges >w<
