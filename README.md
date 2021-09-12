@@ -1,2 +1,2 @@
-# CP
-Other problems I've done from different online judges >w<
+# MiscCP
+Submissions to various problems on different coding online judges.
