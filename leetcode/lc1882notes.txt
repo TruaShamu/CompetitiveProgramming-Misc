@@ -1,0 +1,31 @@
+Todo: elaborate more
+
+Basically there are 2 types of actions.
+1. Scheduling tasks to servers (what we care about)
+2. The actual time duration of fulfilling the tasks (what we don’t care about)
+
+Task[i] becomes available at second i. So 1 task will become available per second, which we immediately schedule (?)
+
+When we schedule a task to a server for x seconds, it means that the server will become unavailable for the next x tasks. So we don’t care about the actual timestamp/time duration we are at, we only care about the task index ‘i’ for Task[i].
+
+The rest of the problem is just a trivial simulation.
+
+We need to differentiate between which servers are available “free” and which are not “jailed”.
+For each server not available, we need to know at which task id they will become available.
+For all servers regardless of availability we need to know the server id and server weight for scheduling.
+
+We need to add items and pick/remove the most prioritized item.
+
+This implies a priorityqueue of objects with custom comparator.
+
+At each taskid, we first grab all the servers in ‘jailed ’ that can fulfill the current task, and move them to ‘free’.
+
+Then if there is a ‘free’ server, we immediately use it, and add it to jailed with the next taskid it will be freed at.
+
+Otherwise, we have to use a ‘jailed’ server. So we poll the prioritized jailed item and it’s freed time, and use it to recalculate the next time it will be freed and then add it back to jailed.
+
+And at each taskid we obviously record which serverid the taskid is assigned to be fulfilled by.
+
+The time complexity is O(M+N)log(N) where N is servers, M is tasks due to complexity of priority queue.
+It’s O(NlogN) to initially propagate the free servers.
+It’s O(logN) everytime to query the priority queues for a server. This is done for each of M tasks.
